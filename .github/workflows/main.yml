@@ -1,0 +1,20 @@
+name: flask-aws-ebn
+env:
+  EB_PACKAGE_S3_BUCKET_NAME : "myflask"
+  EB_APPLICATION_NAME       : "myflask"
+  EB_ENVIRONMENT_NAME       : "Myflask-env"
+  DEPLOY_PACKAGE_NAME       : "flask_app ${{ github.sha }}.zip"
+  AWS_REGION_NAME           : "eu-north-1"
+  
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  ci_pipe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Clone the repo
+        uses: actions/checkout@v2
+      - name: Create zip deployment package
+        run: zip -p ${{ env.$DEPLOY_PACKAGE_NAME }} ./ -x *.git
