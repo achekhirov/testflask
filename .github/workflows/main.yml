@@ -34,7 +34,7 @@ jobs:
 
   cd_pipe:
     runs-on: ubuntu-latest
-    needs: [ci_part]
+    needs: [ci_pipe]
     steps:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
